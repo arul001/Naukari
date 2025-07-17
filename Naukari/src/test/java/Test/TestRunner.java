@@ -8,7 +8,7 @@ public class TestRunner extends BaseTest {
 
         // Login
         LoginPage loginPage = new LoginPage(test.driver);
-        loginPage.login("your_email@example.com", "your_password");
+        loginPage.login("arul.arul.patil6@gmail.com", "9870677609");
 
         // Resume Upload
         ProfilePage profilePage = new ProfilePage(test.driver);

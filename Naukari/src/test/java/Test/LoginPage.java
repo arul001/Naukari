@@ -10,7 +10,7 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    By loginButton = By.xpath("//div[text()='Login']");
+    By loginButton = By.xpath("//a[normalize-space(text())='Login']");
     By emailField = By.xpath("//input[@placeholder='Enter your active Email ID / Username']");
     By passwordField = By.xpath("//input[@placeholder='Enter your password']");
     By submitButton = By.xpath("//button[text()='Login']");
