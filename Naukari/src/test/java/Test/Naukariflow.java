@@ -119,11 +119,27 @@ public class Naukariflow {
 			} else {
 				System.out.println("Data is not updated!");
 			}
-//	            // 5. Upload Resume
-//	            WebElement uploadBtn = driver.findElement(By.xpath("//input[@type='file' and contains(@name, 'resumeUpload')]"));
-//	            uploadBtn.sendKeys("C:\\path\\to\\your\\resume.pdf"); // Replace with your actual file path
-//
-//	            System.out.println("📄 Resume uploaded successfully!");
+	            // 5. Upload Resume
+	            WebElement uploadBtn = driver.findElement(By.xpath("(//input[@type='button'])[1]"));
+	            uploadBtn.sendKeys("C:\\Users\\user\\Desktop\\r1\\Arulpatil_8 years experience_N.docx"); // Replace with your actual file path
+
+	            System.out.println("📄 Resume uploaded successfully!");
+	            
+	            Date d= new Date();
+	          String time=    d.date();
+	        
+	        
+	        //        //Uploaded on Jul 08, 2025
+	        String Expectedmessage="Uploaded"+" on"+" "+time;
+	        
+	        String uploadedmessage = driver.findElement(By.xpath("//div[@class='updateOn typ-14Regular']")).getText();
+		//	String uploadedmessage1 = sucess.getText();
+
+			if (uploadedmessage.equalsIgnoreCase("Expectedmessage")) {
+				System.out.println("Resume updated successfully and its verifies on server text!");
+			} else {
+				System.out.println("Resume is not updated successfully and its verifies on server text!!");
+			}
 
 			// 6. Logout (hover & click)
 			WebElement userIcon = driver.findElement(By.xpath("//div[@class='nI-gNb-drawer__icon']"));

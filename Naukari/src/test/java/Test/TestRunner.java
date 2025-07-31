@@ -5,6 +5,8 @@ public class TestRunner extends BaseTest {
     public static void main(String[] args) throws InterruptedException {
         TestRunner test = new TestRunner();
         test.setup();
+        
+        String excelPath = System.getProperty("user.dir") + "/External/Arulpatil_8 years experience_N.docx";
 
         // Login
         LoginPage loginPage = new LoginPage(test.driver);
@@ -12,7 +14,8 @@ public class TestRunner extends BaseTest {
 
         // Resume Upload
         ProfilePage profilePage = new ProfilePage(test.driver);
-        profilePage.uploadResume("C:\\path\\to\\your\\resume.pdf");
+      //  profilePage.uploadResume("C:\\Users\\user\\git\\Naukari\\Naukari\\src\\test\\resources\\External\\Arulpatil_8 years_N.docx");
+        profilePage.uploadResume(excelPath);
 
         // Logout
         LogoutPage logoutPage = new LogoutPage(test.driver);
