@@ -6,6 +6,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.time.Duration;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.HashMap;
+import java.util.Map;
 
 public class cvUpdated {
 
@@ -15,27 +19,22 @@ public class cvUpdated {
 		// WebDriverManager.chromedriver().setup();
 
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--disable-notifications");
-		options.addArguments("--disable-popup-blocking");
-		options.addArguments("--disable-infobars");
-		options.addArguments("--disable-extensions");
-		options.addArguments("--disable-save-password");
-		options.addArguments("--disable-features=site-per-process");
 
-		// Add the preference to disable the save password prompt
-		options.addArguments("--disable-web-security");
-		options.addArguments("--allow-running-insecure-content");
-		options.addArguments("--ignore-certificate-errors");
+		// Disable Chrome Password Manager
+		Map<String, Object> prefs = new HashMap<>();
+		prefs.put("credentials_enable_service", false); // Disable password manager
+		prefs.put("profile.password_manager_enabled", false); // Disable save password prompt
 
-		options.addArguments("--disable-popup-blocking"); // Disable all pop-ups
-		options.addArguments("--disable-notifications"); // Disable all notifications
-		options.addArguments("--disable-infobars"); // Disable infobars
-		options.addArguments("--disable-extensions"); // Disable all extensions
-		options.addArguments("--disable-save-password"); // Disable save password prompt
+		options.setExperimentalOption("prefs", prefs);
 
+		// Disable automation flags and extensions
+		options.addArguments("--disable-save-password-bubble"); // This may help prevent password popups
+		options.addArguments("--disable-notifications"); // Optional: disable all Chrome notifications
+
+		WebDriver driver = new ChromeDriver(options);
 
 		// Use the options when creating the ChromeDriver
-		WebDriver driver = new ChromeDriver(options);
+		// WebDriver driver = new ChromeDriver(options);
 
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -65,23 +64,25 @@ public class cvUpdated {
 			// Wait to load profile page
 			Thread.sleep(5000);
 
-			
-	            // 5. Upload Resume
-	            WebElement uploadBtn = driver.findElement(By.xpath("(//input[@type='button'])[1]"));
-	            uploadBtn.sendKeys("C:\\Users\\user\\Desktop\\r1\\Arulpatil_8 years experience_N.docx"); // Replace with your actual file path
+			// 5. Upload Resume
+			WebElement uploadBtn = driver.findElement(By.xpath("(//input[@type='button'])[1]"));
+			Thread.sleep(5000);
+			uploadBtn.sendKeys("C:\\Users\\user\\git\\Naukari\\Naukari\\src\\test\\resources\\External\\Arulpatil_8 years experience_N.docx"); // Replace with
+																										// your actual
+																										// file path 
+			System.out.println("📄 Resume uploaded successfully!");
 
-	            System.out.println("📄 Resume uploaded successfully!");
-	            
-	            Date d= new Date();
-	          String time=    d.date();
-	        
-	        
-	        //        //Uploaded on Jul 08, 2025
-	        String Expectedmessage="Uploaded"+" on"+" "+time;
-	        
-	        String uploadedmessage = driver.findElement(By.xpath("//div[@class='updateOn typ-14Regular']")).getText();
-		//	String uploadedmessage1 = sucess.getText();
+			Date d = new Date();
+			String time = d.date();
 
+			// //Uploaded on Jul 08, 2025
+			String Expectedmessage = "Uploaded" + " on" + " " + time;
+
+			String uploadedmessage = driver.findElement(By.xpath("//div[@class='updateOn typ-14Regular']")).getText();
+			// String uploadedmessage1 = sucess.getText();
+
+			System.out.println("uploadedmessage" + uploadedmessage);
+			System.out.println("Expectedmessage" + Expectedmessage);
 			if (uploadedmessage.equalsIgnoreCase("Expectedmessage")) {
 				System.out.println("Resume updated successfully and its verifies on server text!");
 			} else {
